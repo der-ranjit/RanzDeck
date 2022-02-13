@@ -1,0 +1,13 @@
+{
+    "name": "RanzDeck",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/der-ranjit/RanzDeck",
+    "description": "Just some random new cards for testing purposes.",
+    "dependencies": [
+        "BepInEx-BepInExPack_ROUNDS-5.4.1100",
+        "willis81808-UnboundLib-2.10.2",
+        "Pykess-ModdingUtils-0.2.6",
+        "Pykess-CardChoiceSpawnUniqueCardPatch-0.1.7",
+        "com.willuwontu.rounds.BlockForcePatch-1.0.1"
+    ]
+}
