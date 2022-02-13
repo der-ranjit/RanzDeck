@@ -16,8 +16,8 @@ namespace RanzCards.Cards
         {
             //Edits values on card itself, which are then applied to the player in `ApplyCardStats`
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been setup.");
-            block.cdMultiplier = 0.5f;
-            statModifiers.health = 0.5f;
+            block.cdMultiplier = 0.1f;
+            statModifiers.health = 0.1f;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -61,14 +61,14 @@ namespace RanzCards.Cards
                 {
                     positive = false,
                     stat = "Health",
-                    amount = "-50%",
+                    amount = "-90%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "Block Cooldown",
-                    amount = "-50%",
+                    amount = "-90%",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
