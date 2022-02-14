@@ -1,16 +1,19 @@
-﻿using UnboundLib.Cards;
+﻿using RanzDeck.MonoBehaviours;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class DrFatBot : CustomCard
+    class CockyBlocky : CustomCard
     {
         public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "Dr. Fat Bot";
-        protected override string GetDescription() => "He likes turtles :)";
+        protected override string GetTitle() => "Cocky Blocky";
+        protected override string GetDescription() => "Blocking a projectile teleports behind the attacker.";
         protected override GameObject? GetCardArt() => null;
-        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
+        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Common;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
+
+        private bool isPrimaryEffect = false;
 
         /// <summary>
         /// Called when a card is instantiated (on game and gamemode init / start).
@@ -19,8 +22,6 @@ namespace RanzDeck.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"RanzDeck: Card '{GetTitle()}' has been setup.");
-            block.cdMultiplier = 1.3f;
-            statModifiers.health = 3f;
         }
 
         /// <summary>
@@ -30,6 +31,12 @@ namespace RanzDeck.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            // only add the teleport effect once
+            TeleportToPlayerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportToPlayerBlockEffect>();
+            if (existingEffect == null) {
+                this.isPrimaryEffect = true;
+                player.gameObject.AddComponent<TeleportToPlayerBlockEffect>();
+            }
         }
 
         /// <summary>
@@ -39,6 +46,9 @@ namespace RanzDeck.Cards
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
+            if (this.isPrimaryEffect) {
+                Destroy(player.gameObject.GetComponent<TeleportToPlayerBlockEffect>());
+            }
         }
 
         protected override CardInfoStat[] GetStats()
@@ -48,16 +58,9 @@ namespace RanzDeck.Cards
                 new CardInfoStat()
                 {
                     positive = true,
-                    stat = "Health",
-                    amount = "+300%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aHugeAmountOf
-                },
-                new CardInfoStat()
-                {
-                    positive = false,
-                    stat = "Block Cooldown",
-                    amount = "+30%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLotOf
+                    stat = "Effect",
+                    amount = "No",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
         }

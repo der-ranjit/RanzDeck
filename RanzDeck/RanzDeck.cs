@@ -14,7 +14,7 @@ namespace RanzDeck
     public class RanzDeck : BaseUnityPlugin
     {
         // needed for BepinEx stuff (exposes the GameObject)
-        public static RanzDeck instance { get; private set; }
+        public static RanzDeck? instance { get; private set; }
 
         public const string ModInitials = "OOF";
         public const string Version = "1.0.0";
@@ -30,8 +30,9 @@ namespace RanzDeck
         void Start()
         {
             instance = this;
+            CustomCard.BuildCard<DrSmollBot>();
             CustomCard.BuildCard<DrFatBot>();
-            CustomCard.BuildCard<CockBlock>();
+            CustomCard.BuildCard<CockyBlocky>();
         }
     }
 }
