@@ -19,7 +19,7 @@ namespace RanzDeck.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"RanzDeck: Card '{GetTitle()}' has been setup.");
-            block.cdMultiplier = 0.1f;
+            block.cdMultiplier = 0.25f;
             statModifiers.health = 0.1f;
         }
 
