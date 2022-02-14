@@ -8,7 +8,7 @@ namespace RanzDeck.Cards
     {
         public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Cocky Blocky";
-        protected override string GetDescription() => "Blocking a projectile teleports behind the attacker.";
+        protected override string GetDescription() => "Blocking a projectile teleports you behind the attacker's aim direction.";
         protected override GameObject? GetCardArt() => null;
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
@@ -22,6 +22,8 @@ namespace RanzDeck.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"RanzDeck: Card '{GetTitle()}' has been setup.");
+            statModifiers.health = 0.7f;
+            block.cdMultiplier = 1.1f;
         }
 
         /// <summary>
@@ -32,10 +34,10 @@ namespace RanzDeck.Cards
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             // only add the teleport effect once
-            TeleportToPlayerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportToPlayerBlockEffect>();
+            TeleportToAttackerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportToAttackerBlockEffect>();
             if (existingEffect == null) {
                 this.isPrimaryEffect = true;
-                player.gameObject.AddComponent<TeleportToPlayerBlockEffect>();
+                player.gameObject.AddComponent<TeleportToAttackerBlockEffect>();
             }
         }
 
@@ -47,13 +49,29 @@ namespace RanzDeck.Cards
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             if (this.isPrimaryEffect) {
-                Destroy(player.gameObject.GetComponent<TeleportToPlayerBlockEffect>());
+                Destroy(player.gameObject.GetComponent<TeleportToAttackerBlockEffect>());
             }
         }
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[]{};
+            return new CardInfoStat[]
+            {
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Health",
+                    amount = "-30%",
+                    simepleAmount = CardInfoStat.SimpleAmount.lower
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Block Cooldown",
+                    amount = "+10%",
+                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
+                }
+            };
         }
     }
 }

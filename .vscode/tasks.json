@@ -14,6 +14,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "copyDllToMods",
+            "command": "copy",
+            "type": "shell",
+            "args": [
+                "/y",
+                "${workspaceFolder}\\RanzDeck\\bin\\Debug\\netstandard2.1\\RanzDeck.dll",
+                "C:\\Users\\ranjit\\AppData\\Roaming\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\plugins\\ranz-RanzDeck"
+            ],
+            "problemMatcher": [],
+            "dependsOn": ["build"]
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",
