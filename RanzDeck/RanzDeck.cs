@@ -1,9 +1,9 @@
 ﻿using BepInEx;
 using UnboundLib.Cards;
 using HarmonyLib;
-using RanzCards.Cards;
+using RanzDeck.Cards;
 
-namespace RanzCards
+namespace RanzDeck
 {
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
@@ -31,6 +31,7 @@ namespace RanzCards
         {
             instance = this;
             CustomCard.BuildCard<DrFatBot>();
+            CustomCard.BuildCard<PortalGun>();
         }
     }
 }

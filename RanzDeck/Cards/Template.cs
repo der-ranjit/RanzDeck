@@ -7,7 +7,7 @@ using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
 
-namespace RanzCards.Cards
+namespace RanzDeck.Cards
 {
     class Template : CustomCard
     {
