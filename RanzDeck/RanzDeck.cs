@@ -24,7 +24,7 @@ namespace RanzDeck
 
         private static readonly AssetBundle CardArtBundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("ranzdeck", typeof(RanzDeck).Assembly);
  
-        public static GameObject DrFatBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_REALDRFATBOT");
+        public static GameObject DrFatBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRFATBOT");
 
         void Awake()
         {
