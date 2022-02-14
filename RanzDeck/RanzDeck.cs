@@ -31,7 +31,7 @@ namespace RanzDeck
         {
             instance = this;
             CustomCard.BuildCard<DrFatBot>();
-            CustomCard.BuildCard<PortalGun>();
+            CustomCard.BuildCard<CockBlock>();
         }
     }
 }

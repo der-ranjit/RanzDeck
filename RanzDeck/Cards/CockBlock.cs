@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class PortalGun : CustomCard
+    class CockBlock : CustomCard
     {
          public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Cock Block";
