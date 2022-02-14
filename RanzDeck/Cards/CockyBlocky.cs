@@ -22,8 +22,8 @@ namespace RanzDeck.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"RanzDeck: Card '{GetTitle()}' has been setup.");
-            statModifiers.health = 0.7f;
-            block.cdMultiplier = 1.1f;
+            statModifiers.health = 0.65f;
+            block.cdMultiplier = 0.9f;
         }
 
         /// <summary>
@@ -34,10 +34,10 @@ namespace RanzDeck.Cards
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
             // only add the teleport effect once
-            TeleportToAttackerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportToAttackerBlockEffect>();
+            TeleportBehindAttackerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>();
             if (existingEffect == null) {
                 this.isPrimaryEffect = true;
-                player.gameObject.AddComponent<TeleportToAttackerBlockEffect>();
+                player.gameObject.AddComponent<TeleportBehindAttackerBlockEffect>();
             }
         }
 
@@ -49,7 +49,7 @@ namespace RanzDeck.Cards
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             if (this.isPrimaryEffect) {
-                Destroy(player.gameObject.GetComponent<TeleportToAttackerBlockEffect>());
+                Destroy(player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>());
             }
         }
 
@@ -61,15 +61,15 @@ namespace RanzDeck.Cards
                 {
                     positive = false,
                     stat = "Health",
-                    amount = "-30%",
+                    amount = "-35%",
                     simepleAmount = CardInfoStat.SimpleAmount.lower
                 },
                 new CardInfoStat()
                 {
-                    positive = false,
+                    positive = true,
                     stat = "Block Cooldown",
-                    amount = "+10%",
-                    simepleAmount = CardInfoStat.SimpleAmount.aLittleBitOf
+                    amount = "-10%",
+                    simepleAmount = CardInfoStat.SimpleAmount.slightlyLower
                 }
             };
         }

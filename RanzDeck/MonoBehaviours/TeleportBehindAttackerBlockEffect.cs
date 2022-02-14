@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
+using RanzDeck.Utils;
 using UnityEngine;
 
 namespace RanzDeck.MonoBehaviours {
-    class TeleportToAttackerBlockEffect : MonoBehaviour {
+    class TeleportBehindAttackerBlockEffect : MonoBehaviour {
         public void Start()
         {
             Block block = base.GetComponentInParent<Block>();
@@ -12,29 +14,37 @@ namespace RanzDeck.MonoBehaviours {
         
         private void DoBlockedProjectile(GameObject projectile, Vector3 forward, Vector3 hitPos)
         {
-            ProjectileHit component = projectile.GetComponent<ProjectileHit>();
-            Player target = component.ownPlayer;
+            Player target = projectile.GetComponent<ProjectileHit>().ownPlayer;
             this.Go(target);
         }
 
         /// <summary>
-        /// Teleports a source player to a target player.
+        /// Teleports a source player behind target player's aim direction.
         /// </summary>
         /// <param name="target"></param>
         private void Go(Player target)
         {
-            Vector3 sourcePosition = base.transform.position;
+            base.StartCoroutine(this.DelayedTeleport(target));
+        }
+
+        private IEnumerator DelayedTeleport(Player target)
+        {
             Vector3 targetPosition = target.transform.position;
-            Vector3 aimDirection = target.GetComponent<GeneralInput>().aimDirection;
+            Vector3 aimDirection = target.GetComponent<CharacterData>().aimDirection;
             
-            // this needs to be a coroutine with a delay
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
             target.GetComponent<CircleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(5);
+            yield return base.StartCoroutine(WaitFor.Frames(1));
 
-            base.transform.root.transform.position = targetPosition + (aimDirection.normalized * -3.5f);
-            
+            // TODO maybe care for player scale
+            float offsetDistance = 3.5f;
+            base.transform.root.transform.position = targetPosition + (aimDirection.normalized * -1 * offsetDistance);
+
+            yield return base.StartCoroutine(WaitFor.Frames(4));
             this.gameObject.GetComponent<CircleCollider2D>().enabled = true;
             target.GetComponent<CircleCollider2D>().enabled = true;
+            yield break;
         }
 
         private void OnDestroy()
