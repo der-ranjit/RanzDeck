@@ -1,16 +1,17 @@
-﻿using UnboundLib.Cards;
+﻿using RanzDeck.MonoBehaviours;
+using UnboundLib;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class DrFatBot : CustomCard
+    class PortalGun : CustomCard
     {
-        
-  public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "Dr. Fat Bot";
-        protected override string GetDescription() => "He likes turtles";
+         public override string GetModName() => RanzDeck.ModInitials;
+        protected override string GetTitle() => "Cock Block";
+        protected override string GetDescription() => "Blocking a projectile teleports to the attacker.";
         protected override GameObject? GetCardArt() => null;
-        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
+        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Common;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
         /// <summary>
@@ -20,8 +21,6 @@ namespace RanzDeck.Cards
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"RanzDeck: Card '{GetTitle()}' has been setup.");
-            block.cdMultiplier = 0.1f;
-            statModifiers.health = 0.1f;
         }
 
         /// <summary>
@@ -31,6 +30,8 @@ namespace RanzDeck.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{RanzDeck.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
+            // only add the effect once
+            ExtensionMethods.GetOrAddComponent<TeleportToPlayerBlockEffect>(player.gameObject, false);
         }
 
         /// <summary>
@@ -48,16 +49,9 @@ namespace RanzDeck.Cards
             {
                 new CardInfoStat()
                 {
-                    positive = false,
-                    stat = "Health",
-                    amount = "-90%",
-                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
-                },
-                new CardInfoStat()
-                {
                     positive = true,
-                    stat = "Block Cooldown",
-                    amount = "-90%",
+                    stat = "Effect",
+                    amount = "No",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
