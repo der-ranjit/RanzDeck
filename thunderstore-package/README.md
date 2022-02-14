@@ -1,1 +1,1 @@
-Just some random new cards for testing purposes.
+Just some random cards for development / testing purposes.
