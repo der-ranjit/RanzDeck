@@ -2,6 +2,7 @@
 using UnboundLib.Cards;
 using HarmonyLib;
 using RanzDeck.Cards;
+using UnityEngine;
 
 namespace RanzDeck
 {
@@ -20,6 +21,10 @@ namespace RanzDeck
         public const string Version = "1.0.0";
         private const string ModName = "RanzDeck";
         private const string ModId = "ranz.rounds.ranzdeck";
+
+        private static readonly AssetBundle CardArtBundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("ranzdeck", typeof(RanzDeck).Assembly);
+ 
+        public static GameObject DrFatBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRFATBOT");
 
         void Awake()
         {

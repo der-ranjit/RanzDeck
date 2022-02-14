@@ -8,7 +8,7 @@ namespace RanzDeck.Cards
         public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Dr. Fat Bot";
         protected override string GetDescription() => "He likes turtles :)";
-        protected override GameObject? GetCardArt() => null;
+        protected override GameObject? GetCardArt() => RanzDeck.DrFatBotCardArt;
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Common;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
