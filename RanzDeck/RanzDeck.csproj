@@ -8,22 +8,22 @@
   <ItemGroup>
     <EmbeddedResource Include="AssetsEmbedded\ranzdeck" />
     <Reference Include="0Harmony">
-      <HintPath>C:\Users\ranjit\AppData\Roaming\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx">
+      <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\core\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="CardChoiceSpawnUniqueCardPatch">
+      <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\Pykess-CardChoiceSpawnUniqueCardPatch\CardChoiceSpawnUniqueCardPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="ModdingUtils">
+      <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\Pykess-ModdingUtils\ModdingUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="UnboundLib">
+      <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>I:\SteamLibrary\steamapps\common\ROUNDS\Rounds_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>C:\Users\ranjit\AppData\Roaming\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\core\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="CardChoiceSpawnUniqueCardPatch">
-      <HintPath>C:\Users\ranjit\AppData\Roaming\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\Pykess-CardChoiceSpawnUniqueCardPatch\CardChoiceSpawnUniqueCardPatch.dll</HintPath>
-    </Reference>
-    <Reference Include="ModdingUtils">
-      <HintPath>C:\Users\ranjit\AppData\Roaming\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\Pykess-ModdingUtils\ModdingUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="UnboundLib">
-      <HintPath>C:\Users\ranjit\AppData\Roaming\r2modmanPlus-local\ROUNDS\profiles\Multiplayer\BepInEx\plugins\willis81808-UnboundLib\UnboundLib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>I:\SteamLibrary\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.dll</HintPath>
