@@ -5,8 +5,7 @@ namespace RanzDeck.Cards
 {
     class DrFatBot : CustomCard
     {
-        
-  public override string GetModName() => RanzDeck.ModInitials;
+        public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Dr. Fat Bot";
         protected override string GetDescription() => "He likes turtles";
         protected override GameObject? GetCardArt() => null;

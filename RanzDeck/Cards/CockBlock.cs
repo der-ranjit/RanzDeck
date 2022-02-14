@@ -7,7 +7,7 @@ namespace RanzDeck.Cards
 {
     class CockBlock : CustomCard
     {
-         public override string GetModName() => RanzDeck.ModInitials;
+        public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Cock Block";
         protected override string GetDescription() => "Blocking a projectile teleports to the attacker.";
         protected override GameObject? GetCardArt() => null;
