@@ -9,7 +9,7 @@ namespace RanzDeck.Cards
         public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Cocky Blocky";
         protected override string GetDescription() => "Blocking a projectile teleports you behind the attacker's aim direction.";
-        protected override GameObject? GetCardArt() => null;
+        protected override GameObject? GetCardArt() => RanzDeck.CockyBlockyCardArt;
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
