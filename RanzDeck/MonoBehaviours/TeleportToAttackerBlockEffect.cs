@@ -25,7 +25,16 @@ namespace RanzDeck.MonoBehaviours {
         {
             Vector3 sourcePosition = base.transform.position;
             Vector3 targetPosition = target.transform.position;
-            base.transform.root.transform.position = targetPosition + (targetPosition -sourcePosition).normalized * 3f;
+            Vector3 aimDirection = target.GetComponent<GeneralInput>().aimDirection;
+            
+            // this needs to be a coroutine with a delay
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            target.GetComponent<CircleCollider2D>().enabled = false;
+
+            base.transform.root.transform.position = targetPosition + (aimDirection.normalized * -3.5f);
+            
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            target.GetComponent<CircleCollider2D>().enabled = true;
         }
 
         private void OnDestroy()
