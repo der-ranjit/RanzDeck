@@ -10,7 +10,7 @@ namespace RanzDeck.Cards
         protected override string GetTitle() => "Cocky Blocky";
         protected override string GetDescription() => "Blocking a projectile teleports behind the attacker.";
         protected override GameObject? GetCardArt() => null;
-        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Common;
+        protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
         private bool isPrimaryEffect = false;
