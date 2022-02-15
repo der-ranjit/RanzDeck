@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using RanzDeck.Utils;
 using UnityEngine;
 
 namespace RanzDeck.MonoBehaviours {
@@ -24,27 +22,13 @@ namespace RanzDeck.MonoBehaviours {
         /// <param name="target"></param>
         private void Go(Player target)
         {
-            base.StartCoroutine(this.DelayedTeleport(target));
-        }
-
-        private IEnumerator DelayedTeleport(Player target)
-        {
             Vector3 targetPosition = target.transform.position;
             Vector3 aimDirection = target.GetComponent<CharacterData>().aimDirection;
-            
-            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            target.GetComponent<CircleCollider2D>().enabled = false;
             this.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(5);
-            yield return base.StartCoroutine(WaitFor.Frames(1));
 
             // TODO maybe care for player scale
             float offsetDistance = 3.5f;
             base.transform.root.transform.position = targetPosition + (aimDirection.normalized * -1 * offsetDistance);
-
-            yield return base.StartCoroutine(WaitFor.Frames(4));
-            this.gameObject.GetComponent<CircleCollider2D>().enabled = true;
-            target.GetComponent<CircleCollider2D>().enabled = true;
-            yield break;
         }
 
         private void OnDestroy()

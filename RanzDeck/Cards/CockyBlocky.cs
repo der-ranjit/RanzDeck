@@ -37,6 +37,7 @@ namespace RanzDeck.Cards
             TeleportBehindAttackerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>();
             if (existingEffect == null) {
                 this.isPrimaryEffect = true;
+                // TODO is this network safe?
                 player.gameObject.AddComponent<TeleportBehindAttackerBlockEffect>();
             }
         }
