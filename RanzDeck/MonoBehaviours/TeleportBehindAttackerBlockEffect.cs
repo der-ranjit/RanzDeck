@@ -24,7 +24,7 @@ namespace RanzDeck.MonoBehaviours {
         {
             Vector3 targetPosition = target.transform.position;
             Vector3 aimDirection = target.GetComponent<CharacterData>().aimDirection;
-            this.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(5);
+            this.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(2);
 
             // TODO maybe care for player scale
             float offsetDistance = 3.5f;
