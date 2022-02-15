@@ -18,7 +18,7 @@ namespace RanzDeck
         public static RanzDeck? instance { get; private set; }
 
         public const string ModInitials = "OOF";
-        public const string Version = "1.2.1";
+        public const string Version = "1.2.2";
         private const string ModName = "RanzDeck";
         private const string ModId = "ranz.rounds.ranzdeck";
 
