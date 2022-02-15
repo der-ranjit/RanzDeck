@@ -26,7 +26,7 @@ namespace RanzDeck
  
         public static GameObject DrFatBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRFATBOT");
         public static GameObject? DrSmolBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRSMALLBOT");
-        public static GameObject? CockyBlockyCardArt = null;
+        public static GameObject? CockyBlockyCardArt = CardArtBundle.LoadAsset<GameObject>("C_COCKYBLOCKY");
 
         void Awake()
         {
