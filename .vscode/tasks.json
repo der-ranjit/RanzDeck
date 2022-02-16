@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build Debug",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,26 +14,15 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "copyDllToMods",
-            "command": "copy",
-            "type": "shell",
-            "args": [
-                "/y",
-                "${workspaceFolder}\\RanzDeck\\bin\\Debug\\netstandard2.1\\RanzDeck.dll",
-                "C:\\Users\\ranjit\\AppData\\Roaming\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\plugins\\ranz-RanzDeck"
-            ],
-            "problemMatcher": [],
-            "dependsOn": ["build"]
-        },
-        {
-            "label": "publish",
+            "label": "build Release",
             "command": "dotnet",
             "type": "process",
             "args": [
-                "publish",
+                "build",
                 "${workspaceFolder}/RanzDeck/RanzDeck.csproj",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "-c",
+                "Release"
             ],
             "problemMatcher": "$msCompile"
         },

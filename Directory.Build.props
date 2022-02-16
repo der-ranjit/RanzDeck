@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>..\obj</BaseIntermediateOutputPath>
+    <BaseOutputPath>..\dist</BaseOutputPath>
+  </PropertyGroup>
+</Project>
