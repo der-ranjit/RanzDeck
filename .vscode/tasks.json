@@ -37,6 +37,30 @@
                 "${workspaceFolder}/RanzDeck/RanzDeck.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "copyDll Debug",
+            "command": "copy",
+            "type": "shell",
+            "args": [
+                "/y",
+                "${workspaceFolder}\\dist\\Debug\\netstandard2.1\\RanzDeck.dll",
+                "${env:appdata}\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\plugins\\ranz-RanzDeck"
+            ],
+            "problemMatcher": [],
+            "dependsOn": ["build Debug"]
+        },
+        {
+            "label": "copyDll Release",
+            "command": "copy",
+            "type": "shell",
+            "args": [
+                "/y",
+                "${workspaceFolder}\\dist\\Release\\netstandard2.1\\RanzDeck.dll",
+                "${workspaceFolder}\\thunderstore-package"
+            ],
+            "problemMatcher": [],
+            "dependsOn": ["build Release"]
         }
     ]
 }
