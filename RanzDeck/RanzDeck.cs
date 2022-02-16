@@ -40,6 +40,7 @@ namespace RanzDeck
             CustomCard.BuildCard<DrSmollBot>();
             CustomCard.BuildCard<DrFatBot>();
             CustomCard.BuildCard<CockyBlocky>();
+            // CustomCard.BuildCard<KrazyKevin>();
         }
     }
 }

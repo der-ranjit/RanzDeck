@@ -1,3 +1,4 @@
+using System.Linq;
 using UnboundLib.Cards;
 
 namespace RanzDeck.Cards
@@ -6,7 +7,7 @@ namespace RanzDeck.Cards
     {
         protected float GetPlayerUsages(Player player)
         {
-            return player.data.currentCards.FindAll(card => card.name == this.GetTitle()).Count;
+            return player.data.currentCards.Where(card => card.name == this.GetTitle()).Count();
         }
     }
 }
