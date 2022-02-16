@@ -1,10 +1,10 @@
 ﻿using RanzDeck.MonoBehaviours;
-using UnboundLib.Cards;
+using UnboundLib;
 using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class CockyBlocky : CustomCard
+    class CockyBlocky : RanzCard
     {
         public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => "Cocky Blocky";
@@ -12,8 +12,6 @@ namespace RanzDeck.Cards
         protected override GameObject? GetCardArt() => RanzDeck.CockyBlockyCardArt;
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
-
-        private bool isPrimaryEffect = false;
 
         /// <summary>
         /// When modifying the supplied parameters / objects, those modifications are copied over to the respective stats in "ApplyCardStats()"
@@ -30,12 +28,7 @@ namespace RanzDeck.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             // only add the teleport effect once
-            TeleportBehindAttackerBlockEffect existingEffect = player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>();
-            if (existingEffect == null) {
-                this.isPrimaryEffect = true;
-                // TODO is this network safe?
-                player.gameObject.AddComponent<TeleportBehindAttackerBlockEffect>();
-            }
+            ExtensionMethods.GetOrAddComponent<TeleportBehindAttackerBlockEffect>(player.gameObject);
         }
 
         /// <summary>
@@ -43,7 +36,7 @@ namespace RanzDeck.Cards
         /// </summary>
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            if (this.isPrimaryEffect) {
+            if (this.GetPlayerUsages(player) == 0) {
                 Destroy(player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>());
             }
         }
