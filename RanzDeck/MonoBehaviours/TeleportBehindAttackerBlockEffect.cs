@@ -9,20 +9,20 @@ namespace RanzDeck.MonoBehaviours
         {
             Block block = base.GetComponentInParent<Block>();
             block.BlockProjectileAction = (Action<GameObject, Vector3, Vector3>)Delegate
-                .Combine(block.BlockProjectileAction, new Action<GameObject, Vector3, Vector3>(this.DoBlockedProjectile));
+                .Combine(block.BlockProjectileAction, new Action<GameObject, Vector3, Vector3>(this.HandleBlockedProjectile));
         }
 
-        private void DoBlockedProjectile(GameObject projectile, Vector3 forward, Vector3 hitPos)
+        private void HandleBlockedProjectile(GameObject projectile, Vector3 forward, Vector3 hitPos)
         {
             Player target = projectile.GetComponent<ProjectileHit>().ownPlayer;
-            this.Go(target);
+            this.TeleportTo(target);
         }
 
         /// <summary>
         /// Teleports a source player behind target player's aim direction.
         /// </summary>
         /// <param name="target"></param>
-        private void Go(Player target)
+        private void TeleportTo(Player target)
         {
             Vector3 targetPosition = target.transform.position;
             Vector3 aimDirection = target.GetComponent<CharacterData>().aimDirection;
@@ -37,7 +37,7 @@ namespace RanzDeck.MonoBehaviours
         {
             Block block = base.GetComponentInParent<Block>();
             block.BlockProjectileAction = (Action<GameObject, Vector3, Vector3>)Delegate
-                .Remove(block.BlockProjectileAction, new Action<GameObject, Vector3, Vector3>(this.DoBlockedProjectile));
+                .Remove(block.BlockProjectileAction, new Action<GameObject, Vector3, Vector3>(this.HandleBlockedProjectile));
         }
     }
 }

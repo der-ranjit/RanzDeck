@@ -6,9 +6,8 @@ namespace RanzDeck.MonoBehaviours
 {
     class Rampage : RanzBehavior
     {
-        private float healthToDamageRatio = 0.2f;
-        private float massToBounceForceRatio = 1.4f;
-        private float forceMultiplier = 200f;
+        private float healthToDamageRatio = 0.25f;
+        private float massToBounceForceRatio = 150f;
 
         public void Start()
         {
@@ -28,8 +27,8 @@ namespace RanzDeck.MonoBehaviours
             Player player = base.GetComponentInParent<Player>();
             float healthDamage = player.data.health * this.healthToDamageRatio;
             Vector2 damage = normal.normalized * healthDamage;
-            float force = (float)player.data.playerVel.GetFieldValue("mass") * this.massToBounceForceRatio * this.forceMultiplier;
-            Vector2 bounceForce = normal.normalized * force;
+            float mass = (float)player.data.playerVel.GetFieldValue("mass");
+            Vector2 bounceForce = normal.normalized * mass * this.massToBounceForceRatio;
             player.data.healthHandler.CallTakeForce(bounceForce);
             target.data.healthHandler.CallTakeDamage(damage, collision, null, player);
         }
