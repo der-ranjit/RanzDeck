@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
 
-namespace RanzDeck.MonoBehaviours {
-    class TeleportBehindAttackerBlockEffect : MonoBehaviour {
+namespace RanzDeck.MonoBehaviours
+{
+    class TeleportBehindAttackerBlockEffect : RanzBehavior
+    {
         public void Start()
         {
             Block block = base.GetComponentInParent<Block>();
             block.BlockProjectileAction = (Action<GameObject, Vector3, Vector3>)Delegate
                 .Combine(block.BlockProjectileAction, new Action<GameObject, Vector3, Vector3>(this.DoBlockedProjectile));
         }
-        
+
         private void DoBlockedProjectile(GameObject projectile, Vector3 forward, Vector3 hitPos)
         {
             Player target = projectile.GetComponent<ProjectileHit>().ownPlayer;

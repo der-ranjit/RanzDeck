@@ -23,24 +23,41 @@ namespace RanzDeck
         private const string ModId = "ranz.rounds.ranzdeck";
 
         private static readonly AssetBundle CardArtBundle = Jotunn.Utils.AssetUtils.LoadAssetBundleFromResources("ranzdeck", typeof(RanzDeck).Assembly);
- 
         public static GameObject DrFatBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRFATBOT");
         public static GameObject? DrSmolBotCardArt = CardArtBundle.LoadAsset<GameObject>("C_DRSMALLBOT");
         public static GameObject? CockyBlockyCardArt = CardArtBundle.LoadAsset<GameObject>("C_COCKYBLOCKY");
 
-        void Awake()
+        private static Harmony? harmony;
+
+        public void Awake()
         {
-            var harmony = new Harmony(ModId);
-            harmony.PatchAll();
+            RanzDeck.harmony = new Harmony(ModId);
+            RanzDeck.harmony.PatchAll();
+            instance = this;
+            this.LoadRanzDeckStuff();
         }
 
-        void Start()
+        public void OnDestroy()
         {
-            instance = this;
+            if (RanzDeck.harmony != null)
+            {
+                RanzDeck.harmony.UnpatchSelf();
+            }
+            this.UnloadRanzDeckStuff();
+        }
+
+        private void LoadRanzDeckStuff()
+        {
             CustomCard.BuildCard<DrSmollBot>();
             CustomCard.BuildCard<DrFatBot>();
             CustomCard.BuildCard<CockyBlocky>();
-            // CustomCard.BuildCard<KrazyKevin>();
+            CustomCard.BuildCard<KrazyKevin>();
+        }
+
+        private void UnloadRanzDeckStuff()
+        {
+            RanzDeck.CardArtBundle.Unload(true);
+            // RanzBehaviorsManager.DestroyAllRanzDeckMonoBehaviours();
         }
     }
 }
