@@ -36,7 +36,8 @@ namespace RanzDeck.Cards
         /// </summary>
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            if (this.GetPlayerUsages(player) == 0) {
+            if (this.GetCurrentUsages(player) == 1)
+            {
                 Destroy(player.gameObject.GetComponent<TeleportBehindAttackerBlockEffect>());
             }
         }

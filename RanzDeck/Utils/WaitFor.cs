@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 
-namespace RanzDeck.Utils {
+namespace RanzDeck.Utils
+{
     public static class WaitFor
     {
         public static IEnumerator Frames(int frameCount)

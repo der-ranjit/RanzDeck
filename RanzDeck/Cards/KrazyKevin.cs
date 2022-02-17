@@ -35,8 +35,7 @@ namespace RanzDeck.Cards
         /// </summary>
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            // TODO check if card is still part of list at this point
-            if (this.GetPlayerUsages(player) == 1) 
+            if (this.GetCurrentUsages(player) == 1)
             {
                 Destroy(player.gameObject.GetComponent<Rampage>());
             }
@@ -70,5 +69,5 @@ namespace RanzDeck.Cards
             };
         }
     }
-    
+
 }
