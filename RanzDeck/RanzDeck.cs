@@ -3,6 +3,9 @@ using UnboundLib.Cards;
 using HarmonyLib;
 using RanzDeck.Cards;
 using UnityEngine;
+using Photon.Pun;
+using UnboundLib.Utils;
+using System.Collections.Generic;
 
 namespace RanzDeck
 {
@@ -28,13 +31,28 @@ namespace RanzDeck
         public static GameObject? CockyBlockyCardArt = CardArtBundle.LoadAsset<GameObject>("C_COCKYBLOCKY");
 
         private static Harmony? harmony;
+        private static bool devMode = true;
+
+        private static List<CardInfo> buildCards = new List<CardInfo>();
+
+        public static void Log(string message)
+        {
+            if (RanzDeck.devMode)
+            {
+                UnityEngine.Debug.Log(message);
+            }
+        }
 
         public void Awake()
         {
             RanzDeck.harmony = new Harmony(ModId);
             RanzDeck.harmony.PatchAll();
             instance = this;
-            this.LoadRanzDeckStuff();
+            RanzDeck.LoadRanzDeckStuff();
+
+            // TODO for devMode load into sandbox mode with 2 players and some given cards (cards need to be awaited)
+            // also return to main menu if possible.
+            // also also try to reset CardManager or default cards may be used (seems to be some issue with sandbox and not leaving the room correctly?)
         }
 
         public void OnDestroy()
@@ -43,21 +61,43 @@ namespace RanzDeck
             {
                 RanzDeck.harmony.UnpatchSelf();
             }
-            this.UnloadRanzDeckStuff();
+            RanzDeck.UnloadRanzDeckStuff();
         }
 
-        private void LoadRanzDeckStuff()
+        private static void LoadRanzDeckStuff()
         {
-            CustomCard.BuildCard<DrSmollBot>();
-            CustomCard.BuildCard<DrFatBot>();
-            CustomCard.BuildCard<CockyBlocky>();
-            CustomCard.BuildCard<KrazyKevin>();
+            RanzDeck.Log("[RanzDeck] Loading start");
+            CustomCard.BuildCard<DrSmollBot>(RanzDeck.HandleCardBuild);
+            CustomCard.BuildCard<DrFatBot>(RanzDeck.HandleCardBuild);
+            CustomCard.BuildCard<CockyBlocky>(RanzDeck.HandleCardBuild);
+            CustomCard.BuildCard<KrazyKevin>(RanzDeck.HandleCardBuild);
         }
 
-        private void UnloadRanzDeckStuff()
+        private static void HandleCardBuild(CardInfo cardInfo)
         {
+            RanzDeck.Log($"[RanzDeck] Loaded card '{cardInfo.name}'");
+            RanzDeck.buildCards.Add(cardInfo);
+        }
+
+        private static void UnloadRanzDeckStuff()
+        {
+            RanzDeck.Log("[RanzDeck] Unloading start");
             RanzDeck.CardArtBundle.Unload(true);
-            // RanzBehaviorsManager.DestroyAllRanzDeckMonoBehaviours();
+            RanzDeck.UnloadBuildCards();
+        }
+
+        private static void UnloadBuildCards()
+        {
+            foreach (CardInfo cardInfo in RanzDeck.buildCards)
+            {
+                RanzDeck.Log($"[RanzDeck] Unloading Card '{cardInfo.name}'"); ;
+                CardManager.DisableCard(cardInfo);
+                CardManager.cards.Remove(cardInfo.name);
+                CustomCard.cards.Remove(cardInfo);
+                ((DefaultPool)PhotonNetwork.PrefabPool).ResourceCache.Remove(cardInfo.name);
+                PhotonNetwork.Destroy(cardInfo.gameObject);
+            }
+            RanzDeck.buildCards.Clear();
         }
     }
 }

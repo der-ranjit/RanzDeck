@@ -45,7 +45,7 @@
             "args": [
                 "/y",
                 "${workspaceFolder}\\dist\\Debug\\netstandard2.1\\RanzDeck.dll",
-                "${env:appdata}\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\plugins\\ranz-RanzDeck"
+                "${env:appdata}\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\scripts"
             ],
             "problemMatcher": [],
             "dependsOn": ["build Debug"]
