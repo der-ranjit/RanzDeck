@@ -13,13 +13,12 @@ namespace RanzDeck.MonoBehaviours
 
         private static void DestroyRanzBehaviours(GameObject gameObject)
         {
-            // TODO do i really need the concrete type here ? :(
             RanzBehavior[] components = gameObject.GetComponents<RanzBehavior>();
             foreach (RanzBehavior component in components)
             {
                 if (component != null)
                 {
-                    RanzDeck.Log($"[RanzDeck] Destroyed '{component.name}'");
+                    RanzDeck.Log($"[RanzDeck] Destroyed '{component.GetType()}'");
                     UnityEngine.Object.Destroy(component);
                 }
             }
