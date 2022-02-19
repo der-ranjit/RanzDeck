@@ -3,20 +3,26 @@
   <PropertyGroup>
     <RoundsFolder>I:\SteamLibrary\steamapps\common\ROUNDS</RoundsFolder>
     <r2modmanDevProfile>RanzDeck-dev</r2modmanDevProfile>
+    <RanzDeckHotReloadPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\$(r2modmanDevProfile)\BepInEx\scripts</RanzDeckHotReloadPath>
     <releasePath>..\thunderstore-package</releasePath>
     <IndirectBuildTask>true</IndirectBuildTask>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <Target Name="CopyDLLs" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="$(RanzDeckHotReloadPath)" />
+    <Message Text="Copied $(ProjectName).dll" Importance="High" />
+  </Target>
+
   <ItemGroup>
     <EmbeddedResource Include="..\AssetsEmbedded\ranzdeck" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>$(appdata)\r2modmanPlus-local\ROUNDS\profiles\$(r2modmanDevProfile)\BepInEx\core\0Harmony.dll</HintPath>
