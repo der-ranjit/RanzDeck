@@ -1,4 +1,5 @@
-﻿using UnboundLib.Cards;
+﻿using RanzDeck.MonoBehaviours;
+using UnboundLib.Cards;
 using UnityEngine;
 
 namespace RanzDeck.Cards
@@ -21,6 +22,8 @@ namespace RanzDeck.Cards
         {
             block.cdMultiplier = 1.3f;
             statModifiers.health = 3f;
+
+            cardInfo.gameObject.AddComponent<CardAuthorText>();
         }
 
         /// <summary>
@@ -58,4 +61,5 @@ namespace RanzDeck.Cards
             };
         }
     }
+
 }

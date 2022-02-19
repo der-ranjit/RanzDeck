@@ -151,7 +151,6 @@ namespace RanzDeck.MonoBehaviours
                     {
                         foreach (ApplyCardStats cardStats in gameObject.GetComponents<ApplyCardStats>())
                         {
-                            DevMode.Log(cardStats.gameObject.name);
                             UnityEngine.Object.Destroy(cardStats.gameObject);
                         };
                     }
