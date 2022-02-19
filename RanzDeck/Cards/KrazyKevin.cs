@@ -11,7 +11,7 @@ namespace RanzDeck.Cards
         public override string GetModName() => RanzDeck.ModInitials;
         protected override string GetTitle() => KrazyKevin.CardName;
         protected override string GetDescription() => "Touching enemies deals damage based on your size. Dealing damage this way will knock you back from your target.";
-        protected override GameObject? GetCardArt() => RanzDeck.KrazyKevinCardArt;
+        protected override GameObject? GetCardArt() => RanzDeck.LoadCardArtAsset("C_KRAZYKEVIN");
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Rare;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
