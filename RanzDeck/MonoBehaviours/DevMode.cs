@@ -27,21 +27,20 @@ namespace RanzDeck.MonoBehaviours
 
         private void Update()
         {
-            if (RanzDeck.devMode)
+            if (RanzDeck.devMode && Input.GetKeyDown(KeyCode.F5))
             {
-                if (Input.GetKeyDown(KeyCode.F5))
-                {
-                    bool activeGame = GameModeManager.CurrentHandler != null;
-                    if (activeGame)
-                    {
-                        this.EnterMainMenu();
-                    }
-                    else
-                    {
-                        this.EnterSandbox();
-                    }
-                }
+                this.ToggleSandBox();
             }
+            else if (RanzDeck.devMode && Input.GetKeyDown(KeyCode.F8))
+            {
+                this.GiveCardsToPlayers();
+            }
+        }
+
+        public void OnDestroy()
+        {
+            // destroy remaining cards 
+            this.DestroyActiveCardObjects();
         }
 
         public void EnterSandbox()
@@ -61,12 +60,24 @@ namespace RanzDeck.MonoBehaviours
                 GameObject cardToPick = CardChoice.instance.AddCard(card);
                 yield return WaitFor.Frames(2);
                 ApplyCardStats cardStats = cardToPick.GetComponent<ApplyCardStats>();
-                DevMode.Log(cardToPick.name);
                 if (cardStats != null)
                 {
                     cardStats.Pick(id);
                     UnityEngine.Object.Destroy(cardToPick);
                 }
+            }
+        }
+
+        private void ToggleSandBox()
+        {
+            bool activeGame = GameModeManager.CurrentHandler != null;
+            if (activeGame)
+            {
+                this.EnterMainMenu();
+            }
+            else
+            {
+                this.EnterSandbox();
             }
         }
 
@@ -89,22 +100,27 @@ namespace RanzDeck.MonoBehaviours
                 if (PlayerAssigner.instance != null)
                 {
                     yield return base.StartCoroutine(PlayerAssigner.instance.CreatePlayer(null, false));
-                    string[] cardsForP1 = {
-                        KrazyKevin.CardName,
-                        DrFatBot.CardName,
-                        DrFatBot.CardName,
-                        DrFatBot.CardName,
-                        DrSmollBot.CardName
-                    };
-                    string[] cardsForP2 = {
-                        KrazyKevin.CardName,
-                        DrFatBot.CardName
-                    };
-                    int player1ID = PlayerManager.instance.players.First().playerID;
-                    int player2ID = player1ID + 1;
-                    base.StartCoroutine(this.ApplyCardsToPlayerID(player1ID, cardsForP1));
+                    this.GiveCardsToPlayers();
                 }
             }
+        }
+
+        private void GiveCardsToPlayers()
+        {
+            string[] cardsForP1 = {
+                    KrazyKevin.CardName,
+                    DrFatBot.CardName,
+                    DrFatBot.CardName,
+                    DrFatBot.CardName,
+                    DrSmollBot.CardName
+                };
+            string[] cardsForP2 = {
+                    KrazyKevin.CardName,
+                    DrFatBot.CardName
+                };
+            int player1ID = PlayerManager.instance.players.First().playerID;
+            int player2ID = player1ID + 1;
+            base.StartCoroutine(this.ApplyCardsToPlayerID(player1ID, cardsForP1));
         }
 
         private void EnterSandboxCardChoiceFix()
@@ -121,6 +137,25 @@ namespace RanzDeck.MonoBehaviours
             if (NetworkConnectionHandler.instance != null)
             {
                 NetworkConnectionHandler.instance.NetworkRestart();
+            }
+        }
+
+        private void DestroyActiveCardObjects()
+        {
+            bool activeGame = GameModeManager.CurrentHandler != null;
+            if (activeGame)
+            {
+                foreach (GameObject gameObject in GameObject.FindObjectsOfType<GameObject>())
+                {
+                    if (gameObject.activeInHierarchy)
+                    {
+                        foreach (ApplyCardStats cardStats in gameObject.GetComponents<ApplyCardStats>())
+                        {
+                            DevMode.Log(cardStats.gameObject.name);
+                            UnityEngine.Object.Destroy(cardStats.gameObject);
+                        };
+                    }
+                }
             }
         }
     }
