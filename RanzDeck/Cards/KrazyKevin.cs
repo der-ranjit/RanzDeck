@@ -6,8 +6,10 @@ namespace RanzDeck.Cards
 {
     class KrazyKevin : RanzCard
     {
+        public static string CardName = "Krazy Kevin";
+
         public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "Krazy Kevin";
+        protected override string GetTitle() => KrazyKevin.CardName;
         protected override string GetDescription() => "Touching enemies deals damage based on your size. Dealing damage this way will knock you back from your target.";
         protected override GameObject? GetCardArt() => null;
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Rare;

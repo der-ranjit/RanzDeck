@@ -39,13 +39,25 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "copyDll Debug",
+            "label": "copyDll Debug hot-reload",
             "command": "copy",
             "type": "shell",
             "args": [
                 "/y",
                 "${workspaceFolder}\\dist\\Debug\\netstandard2.1\\RanzDeck.dll",
                 "${env:appdata}\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev\\BepInEx\\scripts"
+            ],
+            "problemMatcher": [],
+            "dependsOn": ["build Debug"]
+        },
+        {
+            "label": "copyDll Debug",
+            "command": "copy",
+            "type": "shell",
+            "args": [
+                "/y",
+                "${workspaceFolder}\\dist\\Debug\\netstandard2.1\\RanzDeck.dll",
+                "${env:appdata}\\r2modmanPlus-local\\ROUNDS\\profiles\\RanzDeck-Dev-Debug\\BepInEx\\plugins\\ranz-RanzDeck"
             ],
             "problemMatcher": [],
             "dependsOn": ["build Debug"]

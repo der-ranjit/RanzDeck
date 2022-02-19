@@ -6,10 +6,12 @@ namespace RanzDeck.Cards
 {
     class CockyBlocky : RanzCard
     {
+        public static string CardName = "Cocky Blocky";
+
         public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "Cocky Blocky";
+        protected override string GetTitle() => CockyBlocky.CardName;
         protected override string GetDescription() => "Blocking a projectile teleports you behind the attacker's aim direction.";
-        protected override GameObject? GetCardArt() => RanzDeck.CockyBlockyCardArt;
+        protected override GameObject? GetCardArt() => RanzDeck.LoadCardArtAsset("C_COCKYBLOCKY");
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 

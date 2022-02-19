@@ -1,6 +1,5 @@
 using System;
 using HarmonyLib;
-using RanzDeck.MonoBehaviours;
 
 namespace RanzDeck.Patches
 {
@@ -10,7 +9,7 @@ namespace RanzDeck.Patches
     {
         private static void Prefix(Player __instance)
         {
-            RanzBehaviorsManager.DestroyAllRanzDeckMonoBehaviours(__instance.gameObject);
+            RanzDeckLoader.DestroyRanzBehaviours(__instance.gameObject);
         }
     }
 }

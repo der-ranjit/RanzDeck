@@ -5,10 +5,12 @@ namespace RanzDeck.Cards
 {
     class DrSmollBot : CustomCard
     {
+        public static string CardName = "Dr. Smol Bot";
+
         public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "Dr. Smol Bot";
+        protected override string GetTitle() => DrSmollBot.CardName;
         protected override string GetDescription() => "Does not like turtles :(";
-        protected override GameObject? GetCardArt() => RanzDeck.DrSmolBotCardArt;
+        protected override GameObject? GetCardArt() => RanzDeck.LoadCardArtAsset("C_DRSMALLBOT");
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Uncommon;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 

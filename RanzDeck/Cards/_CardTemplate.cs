@@ -5,10 +5,11 @@ namespace RanzDeck.Cards
 {
     class CardTemplate : CustomCard
     {
+        public static string CardName = "";
         public override string GetModName() => RanzDeck.ModInitials;
-        protected override string GetTitle() => "CardName";
+        protected override string GetTitle() => CardTemplate.CardName;
         protected override string GetDescription() => "CardDescription";
-        protected override GameObject? GetCardArt() => null;
+        protected override GameObject? GetCardArt() => RanzDeck.LoadCardArtAsset("C_CARDNAME");
         protected override CardInfo.Rarity GetRarity() => CardInfo.Rarity.Common;
         protected override CardThemeColor.CardThemeColorType GetTheme() => CardThemeColor.CardThemeColorType.EvilPurple;
 
