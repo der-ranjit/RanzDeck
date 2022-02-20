@@ -12,7 +12,7 @@ namespace RanzDeck.MonoBehaviours
     {
         public static DevMode? instance;
 
-        public static void Log(string message)
+        public static void Log(string? message)
         {
             if (RanzDeck.devMode)
             {
