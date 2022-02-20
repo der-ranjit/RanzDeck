@@ -1,10 +1,8 @@
-﻿using RanzDeck.MonoBehaviours;
-using UnboundLib.Cards;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class DrFatBot : CustomCard
+    class DrFatBot : RanzCard
     {
         public static string CardName = "Dr. Fat Bot";
 
@@ -18,12 +16,10 @@ namespace RanzDeck.Cards
         /// <summary>
         /// When modifying the supplied parameters / objects, those modifications are copied over to the respective stats in "ApplyCardStats()"
         /// </summary>
-        public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
+        public override void OnSetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             block.cdMultiplier = 1.3f;
             statModifiers.health = 3f;
-
-            cardInfo.gameObject.AddComponent<CardAuthorText>();
         }
 
         /// <summary>

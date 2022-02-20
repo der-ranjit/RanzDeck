@@ -18,7 +18,7 @@ namespace RanzDeck.Cards
         /// <summary>
         /// When modifying the supplied parameters / objects, those modifications are copied over to the respective stats in "ApplyCardStats()"
         /// </summary>
-        public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
+        public override void OnSetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             statModifiers.movementSpeed = 1.5f;
         }

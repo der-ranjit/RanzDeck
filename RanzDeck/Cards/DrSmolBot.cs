@@ -1,9 +1,8 @@
-﻿using UnboundLib.Cards;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RanzDeck.Cards
 {
-    class DrSmollBot : CustomCard
+    class DrSmollBot : RanzCard
     {
         public static string CardName = "Dr. Smol Bot";
 
@@ -17,7 +16,7 @@ namespace RanzDeck.Cards
         /// <summary>
         /// When modifying the supplied parameters / objects, those modifications are copied over to the respective stats in "ApplyCardStats()"
         /// </summary>
-        public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
+        public override void OnSetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             block.cdMultiplier = 0.25f;
             statModifiers.health = 0.1f;
